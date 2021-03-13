@@ -25,6 +25,8 @@ public class MainDao {
 
 //        usuwanie
 //        userDao.delete(9);
+//        userDao.deleteAll();
+
 
 //        lista użytkowników
 //        User[] allUser = userDao.findAll();

@@ -63,6 +63,17 @@ public class DBUtil {
         }
     }
 
+    private static final String DELETE_USER_ALL = "DELETE FROM user";
+
+    public static void remove(Connection conn, String tableName) {
+        try (PreparedStatement statement =
+                     conn.prepareStatement(DELETE_USER_ALL.replace("tableName", tableName));) {
+            statement.executeUpdate();
+            System.out.println("Deleted User All!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     private static final String UPDATE_USER_QUERY = "UPDATE user SET username = ?, email = ?, password = ? where id = ?";
 

@@ -3,6 +3,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class UserDao {
 
@@ -61,9 +62,30 @@ public class UserDao {
         }
     }
 
+    public void deleteAll() {
+        try (Connection connect = DBUtil.connect()) {
+
+            System.out.print("Na pewno usunąć wszystkie rekory tabeli user?: ");
+
+            Scanner scan = new Scanner(System.in);
+            String s1;
+            while (scan.hasNext()) {
+                s1 = scan.next();
+                if (s1.equals("t")) {
+                    DBUtil.remove(connect, "user");
+                    break;
+                } else {
+                    System.out.println("Zrezygnowałeś");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     private User[] addToArray(User user, User[] users) {
         users = Arrays.copyOf(users, users.length + 1);
-        users[users.length-1] = user;
+        users[users.length - 1] = user;
         return users;
     }
 
